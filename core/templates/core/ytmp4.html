@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube to MP4 Converter - TubeDownloader</title>
+    <link rel="shortcut icon" href="{% static 'core/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'core/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'core/favicon/android-chrome-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'core/favicon/site.webmanifest' %}">
+    <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <header id="navbar">
+                <div class="topnav" id="myTopnav">
+                    <div class="nav-logo">
+                        <a class="navbar-brand" href="/"><span class="logo-name">TubeDownloader</span></a>
+                        <span class="icon humbergericon">☰</span>
+                    </div>
+                    <div id="navItem" class="nav-item">
+                        <a href="{% url 'core:home' %}" class><span>Youtube to MP3</span></a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="container-main">
+            <div class="section-search">
+                <div class="container">
+                    <div class="ytco-section center input-form-area" id="convert">
+                        <h1 class="title">Youtube to MP4</h1>
+                        <div class="row">
+                            <div class="col-md-10 offset-md-1">
+                                <div id="loading-overlay">
+                                    <div class="loading-icon"></div>
+                                </div>
+                                <div class="form-search">
+                                    <form method="POST" id="searchFormHeader">
+                                        <input type="hidden" name="convert_type" value="mp4" id="convert_type">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-search">
+                                                <input type="text" name="search_txt" id="search_txt"
+                                                    class="form-control search-input"
+                                                    placeholder="Paste Youtube URL Here...">
+                                                <span class="input-group-btn">
+                                                    <button type="button" id="btn-submit"
+                                                        class="btn btn-lg btn-search btn-red">Search</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="result-box">
+                                    <div class="loading-overlay">
+                                        <div id="page-preloader"><span class="spinner"></span></div>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="flex-row">
+                    <div class="col-12 col-md-6">
+                        <div class="ytco-section">
+                            <p class="title" style="text-align: center;">How to Use</p>
+                            <ol class="feature-list">
+                                <li>Insert the link in the search box and click the "Search"
+                                    button.</li>
+                                <li>Choose MP4 quality from list and click the "Convert" button.</li>
+                                <li>Wait until the conversion is completed and download the file.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="ytco-section">
+                            <p class="title" style="text-align: center;">TubeDownloader Features</p>
+                            <ul class="list_feature">
+                                <li>Free and Unlimited conversions and downloads</li>
+                                <li>Fast service and high quality</li>
+                                <li>Can convert to both MP3 & MP4</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ytco-section ytco-sec-2">
+                    <div class="mb-0">
+                        <h2 class="title" style="text-align: center;">Free MP3 and MP4 Converter</h2>
+                        <p style="text-align: center;"><b>TubeDownloader</b> the amazing converter that helps you
+                            convert and
+                            download YouTube videos to mp3 format with a simple click. Enjoy our best converter and get
+                            free music to your device.</p>
+                        <p style="text-align: center;">Did you know that with our TubeDownloader you can also convert
+                            videos to MP3 format? by accessing our <a href="{% url 'core:home' %}">Youtube to MP3</a>
+                            converter you will be able to download youtube videos in MP3 format.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="copyright">
+                <ul class="flex flex-a-i-center">
+                    <li><a href="#">Terms of use</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+                </ul>
+                <p>Copyright &copy; 2024 TubeDownloader</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'core/js/jquery.min.js' %}"></script>
+    <script src="{% static 'core/js/yt.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.humbergericon', function () {
+                $('.nav-item').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
