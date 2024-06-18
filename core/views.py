@@ -2,11 +2,27 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'core/index.html')
+    url = None
+    if request.method == 'POST':
+        url = request.POST.get('url')
+        print(url)
+    
+    context = {
+        'url': url,
+    }
+    return render(request, 'core/index.html', context)
 
 
 def youtube_to_mp4(request):
-    return render(request, 'core/ytmp4.html')
+    url = None
+    if request.method == 'POST':
+        url = request.POST.get('url')
+        print(url)
+    
+    context = {
+        'url': url,
+    }
+    return render(request, 'core/ytmp4.html', context)
 
 
 def contact_us(request):

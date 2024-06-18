@@ -42,12 +42,13 @@
                                 </div>
                                 <div class="form-search">
                                     <form method="POST" id="searchFormHeader">
-                                        <input type="hidden" name="convert_type" value="mp4" id="convert_type">
+                                        {% csrf_token %}
                                         <div class="form-group">
                                             <div class="input-group input-group-search">
-                                                <input type="text" name="search_txt" id="search_txt"
+                                                <input type="text" name="url" id="yt_url"
                                                     class="form-control search-input"
-                                                    placeholder="Paste Youtube URL Here...">
+                                                    placeholder="Paste Youtube URL Here..."
+                                                    {% if url %}value="{{ url }}"{% endif %}>
                                                 <span class="input-group-btn">
                                                     <button type="button" id="btn-submit"
                                                         class="btn btn-lg btn-search btn-red">Search</button>
@@ -119,12 +120,23 @@
     </div>
 
     <script src="{% static 'core/js/jquery.min.js' %}"></script>
-    <script src="{% static 'core/js/yt.js' %}"></script>
     <script>
         $(document).ready(function () {
             $(document).on('click', '.humbergericon', function () {
                 $('.nav-item').toggleClass('active');
             });
+        });
+    </script>
+    <script>
+        document.getElementById('btn-submit').addEventListener('click', function() {
+            var inputUrl = document.getElementById('yt_url').value.trim();
+            var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)[\w-]{11}($|\?)/;
+            
+            if (youtubeRegex.test(inputUrl)) {
+                document.getElementById('searchFormHeader').submit();
+            } else {
+                alert('Please enter a valid YouTube video or YouTube Shorts URL.');
+            }
         });
     </script>
 </body>
