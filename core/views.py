@@ -1,4 +1,7 @@
+import io
+
 from django.shortcuts import render
+from django.http import HttpResponse
 from pytube import YouTube
 from pytube.exceptions import RegexMatchError
 
@@ -39,22 +42,22 @@ def home(request):
 
         try:
             yt_video = YouTube(yt_url)
+            yt_title = yt_video.title
+            yt_thumbnail = yt_video.thumbnail_url
+            yt_duration = format_duration(yt_video.length)
+            audio = yt_video.streams.filter(only_audio=True).first()
+            if audio:
+                audio_size = format_audio_size(audio.filesize)
+            else:
+                audio_size = "Unable to get Size"
         except RegexMatchError:
             message = "Invalid URL"
-
             context = {
                 "url": yt_url,
                 "message": message,
             }
             return render(request, "core/index.html", context)
-        
-        yt_title = yt_video.title
-        yt_thumbnail = yt_video.thumbnail_url
-        yt_duration = format_duration(yt_video.length)
-        audio = yt_video.streams.filter(only_audio=True).first()
-        audio_size = format_audio_size(audio.filesize)
-
-        
+ 
     context = {
         "url": yt_url,
         "yt_thumbnail": yt_thumbnail,
@@ -63,6 +66,21 @@ def home(request):
         "audio_size": audio_size
     }
     return render(request, "core/index.html", context)
+
+
+# Download audio
+def download_audio(request):
+    yt_url = request.GET.get("yt_url")
+    yt_video = YouTube(yt_url)
+    audio = yt_video.streams.filter(only_audio=True).first()
+    
+    buffer = io.BytesIO()
+    audio.stream_to_buffer(buffer)
+    buffer.seek(0)
+
+    response = HttpResponse(buffer, content_type='audio/mp3')
+    response['Content-Disposition'] = f'attachment; filename="{yt_video.title}.mp3"'
+    return response
 
 
 # Youtube to mp4 

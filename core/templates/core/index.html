@@ -81,7 +81,10 @@
                                                                         <span>{{ audio_size }}</span>
                                                                     </div>
                                                                     <div class="row r-flex">
-                                                                        <a class="btn btn-success">Download</a>
+                                                                        <form id="downloadForm" action="{% url 'core:download_audio' %}" method="get">
+                                                                            <input type="hidden" name="yt_url" value="{{ url }}">
+                                                                        </form>    
+                                                                        <a class="btn btn-success" onclick="document.getElementById('downloadForm').submit();">Download</a>                                                                   
                                                                     </div>
                                                                 </div>
                                                             </div>
