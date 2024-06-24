@@ -37,9 +37,6 @@
                         <h1 class="title">Youtube to MP3</h1>
                         <div class="row">
                             <div class="col-md-10 offset-md-1">
-                                <div id="loading-overlay">
-                                    <div class="loading-icon"></div>
-                                </div>
                                 <div class="form-search">
                                     <form method="POST" id="searchFormHeader">
                                         {% csrf_token %}
@@ -50,18 +47,50 @@
                                                     placeholder="Paste Youtube URL Here..."
                                                     {% if url %}value="{{ url }}"{% endif %}>
                                                 <span class="input-group-btn">
-                                                    <button type="button" id="btn-submit"
+                                                    <button type="submit"
                                                         class="btn btn-lg btn-search btn-red">Search</button>
                                                 </span>
                                             </div>
+                                            {% if message %}
+                                                <div id="url-error" class="text-danger">{{ message }}</div>
+                                            {% endif %}
                                         </div>
                                     </form>
                                 </div>
                                 <div id="result-box">
-                                    <div class="loading-overlay">
-                                        <div id="page-preloader"><span class="spinner"></span></div>
+                                    <div id="result">
+                                        {% if yt_title %}
+                                            <div class="result-data">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row r-flex">
+                                                            <div class="col-md-4">
+                                                                <img class="media-object img-thumbnail" src="{{ yt_thumbnail }}" alt="thumbnail">
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="media-body">
+                                                                    <h5 class="media-heading">
+                                                                        {{ yt_title }}
+                                                                    </h5>
+                                                                    <div class="yt-duration">
+                                                                        Duration:
+                                                                        <span class="video-duration">{{ yt_duration }}</span>
+                                                                    </div>
+                                                                    <div class="download-size">
+                                                                        File size:
+                                                                        <span>{{ audio_size }}</span>
+                                                                    </div>
+                                                                    <div class="row r-flex">
+                                                                        <a class="btn btn-success">Download</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    <div id="result"></div>
                                 </div>
                             </div>
                         </div>
@@ -124,18 +153,6 @@
             $(document).on('click', '.humbergericon', function () {
                 $('.nav-item').toggleClass('active');
             });
-        });
-    </script>
-    <script>
-        document.getElementById('btn-submit').addEventListener('click', function() {
-            var inputUrl = document.getElementById('yt_url').value.trim();
-            var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)[\w-]{11}($|\?)/;
-            
-            if (youtubeRegex.test(inputUrl)) {
-                document.getElementById('searchFormHeader').submit();
-            } else {
-                alert('Please enter a valid YouTube video or YouTube Shorts URL.');
-            }
         });
     </script>
 </body>
