@@ -17,15 +17,15 @@ def format_duration(seconds):
 
 # Change audio_size format
 def format_audio_size(size):
-    suffixes = ['B', 'KB', 'MB', 'GB', 'TB']
+    suffixes = ["B", "KB", "MB", "GB", "TB"]
     threshold = 1024
     index = 0
-    
+
     # Convert size to appropriate unit
     while size >= threshold and index < len(suffixes) - 1:
         size /= threshold
         index += 1
-    
+
     return f"{size:.2f} {suffixes[index]}"
 
 
@@ -35,7 +35,7 @@ def home(request):
     yt_title = None
     yt_thumbnail = None
     yt_duration = None
-    audio_size =None
+    audio_size = None
 
     if request.method == "POST":
         yt_url = request.POST.get("url")
@@ -57,13 +57,13 @@ def home(request):
                 "message": message,
             }
             return render(request, "core/index.html", context)
- 
+
     context = {
         "url": yt_url,
         "yt_thumbnail": yt_thumbnail,
         "yt_title": yt_title,
         "yt_duration": yt_duration,
-        "audio_size": audio_size
+        "audio_size": audio_size,
     }
     return render(request, "core/index.html", context)
 
@@ -73,17 +73,17 @@ def download_audio(request):
     yt_url = request.GET.get("yt_url")
     yt_video = YouTube(yt_url)
     audio = yt_video.streams.filter(only_audio=True).first()
-    
+
     buffer = io.BytesIO()
     audio.stream_to_buffer(buffer)
     buffer.seek(0)
 
-    response = HttpResponse(buffer, content_type='audio/mp3')
-    response['Content-Disposition'] = f'attachment; filename="{yt_video.title}.mp3"'
+    response = HttpResponse(buffer, content_type="audio/mp3")
+    response["Content-Disposition"] = f'attachment; filename="{yt_video.title}.mp3"'
     return response
 
 
-# Youtube to mp4 
+# Youtube to mp4
 def youtube_to_mp4(request):
     url = None
     if request.method == "POST":
