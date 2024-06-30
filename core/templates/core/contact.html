@@ -2,65 +2,65 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - TubeDownloader</title>
-    <link rel="shortcut icon" href="{% static 'core/favicon/favicon.ico' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'core/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'core/favicon/android-chrome-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'core/favicon/site.webmanifest' %}">
-    <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Us - TubeDownloader</title>
+        <link rel="shortcut icon" href="{% static 'core/favicon/favicon.ico' %}" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'core/favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'core/favicon/android-chrome-192x192.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/favicon/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'core/favicon/site.webmanifest' %}">
+        <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+    </head>
 
-<body>
-    <div class="wrapper">
-        <div class="container">
-            <header id="navbar">
-                <div class="topnav" id="myTopnav">
-                    <div class="nav-logo">
-                        <a class="navbar-brand" href="/"><span class="logo-name">TubeDownloader</span></a>
-                        <span class="icon humbergericon">☰</span>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <header id="navbar">
+                    <div class="topnav" id="myTopnav">
+                        <div class="nav-logo">
+                            <a class="navbar-brand" href="/"><span class="logo-name">TubeDownloader</span></a>
+                            <span class="icon humbergericon">☰</span>
+                        </div>
+                        <div id="navItem" class="nav-item">
+                            <a href="{% url 'core:home' %}" class><span>Home</span></a>
+                        </div>
                     </div>
-                    <div id="navItem" class="nav-item">
-                        <a href="{% url 'core:home' %}" class><span>Home</span></a>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <div class="container-main">
-            <div class="static-page">
-                <div class="container">
-                    <h1 style="text-align: center;">Contact</h1>
-                    <br>
-                    <p>For any information related to our website, you can contact us at the email address: <a
+                </header>
+            </div>
+            <div class="container-main">
+                <div class="static-page">
+                    <div class="container">
+                        <h1 style="text-align: center;">Contact</h1>
+                        <br>
+                        <p>For any information related to our website, you can contact us at the email address: <a
                             href="mailto:contactmesafwan@gmail.com"><span>contactmesafwan@gmail.com</span></a></p>
-                    <p>We will respond within 1-2 working days.</p>
+                        <p>We will respond within 1-2 working days.</p>
+                    </div>
                 </div>
             </div>
+            <footer>
+                <div class="copyright">
+                    <ul class="flex flex-a-i-center">
+                        <li><a href="#">Terms of use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+                    </ul>
+                    <p>Copyright &copy; 2024 TubeDownloader</p>
+                </div>
+            </footer>
         </div>
-        <footer>
-            <div class="copyright">
-                <ul class="flex flex-a-i-center">
-                    <li><a href="#">Terms of use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
-                </ul>
-                <p>Copyright &copy; 2024 TubeDownloader</p>
-            </div>
-        </footer>
-    </div>
 
-    <script src="{% static 'core/js/jquery.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            $(document).on('click', '.humbergericon', function () {
-                $('.nav-item').toggleClass('active');
+        <script src="{% static 'core/js/jquery.min.js' %}"></script>
+        <script>
+            $(document).ready(function () {
+                $(document).on('click', '.humbergericon', function () {
+                    $('.nav-item').toggleClass('active');
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
