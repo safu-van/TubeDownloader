@@ -83,19 +83,3 @@ def download_audio(request):
     return response
 
 
-# Youtube to mp4
-def youtube_to_mp4(request):
-    url = None
-    if request.method == "POST":
-        url = request.POST.get("url")
-        print(url)
-
-    context = {
-        "url": url,
-    }
-    return render(request, "core/ytmp4.html", context)
-
-
-# Contact Page
-def contact_us(request):
-    return render(request, "core/contact.html")
