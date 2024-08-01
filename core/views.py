@@ -95,3 +95,7 @@ def youtube_to_mp4(request):
     }
     return render(request, "core/ytmp4.html", context)
 
+
+# Contact Page
+def contact_us(request):
+    return render(request, "core/contact.html")
